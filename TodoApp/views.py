@@ -134,6 +134,24 @@ def Login(request):
            
     return render(request,'Todo/Login.html')
 
-
-
-# updated code
+import pandas as pd
+from django.http import FileResponse
+import io
+def TaskasExcel(request):
+    user = request.user
+    data =   Todo.objects.filter(user=user,IsDelete=False)
+    todo_list = []
+    for item in data:
+        todo_list.append({
+            'Title': item.Title,
+            'Description': item.Description,
+            'CreatedAt': item.CreatedAt.date(),
+            'CompletionDate': item.CompletionDate.date(),
+            'CompletionStatus': item.completionStatus,
+        })
+    df  = pd.DataFrame(todo_list)
+    output = io.BytesIO()
+    df.to_excel(output,index=False)
+    output.seek(0)
+    response = FileResponse(output,as_attachment=True,filename='tasks.xlsx')
+    return response

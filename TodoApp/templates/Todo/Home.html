@@ -43,8 +43,10 @@
 </style>
 
     <a href="{% url 'AddTask' %}" class="btn btn-primary btn-sm" style="margin-bottom: 15px;">New Task</a>
-        
-             
+    
+    <a href="{% url 'TaskasExcel' %}" class="btn btn-primary btn-sm" style="margin-bottom: 15px;">Download Task List</a>
+
+
         {% for list in page_obj  %}
         <div class="card">
             <div class="card-header">
