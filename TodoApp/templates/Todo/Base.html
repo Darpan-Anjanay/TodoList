@@ -27,9 +27,7 @@
                         <li class="nav-item text-white">
                           <span class="navbar-brand fw-bold text-white me-2" >Welcome {{request.user.username}}</span>
                         </li>    
-                        {% comment %} <li class="nav-item">
-                            <a class="btn btn-primary btn-sm me-2" href="">Profile</a>
-                        </li> {% endcomment %}
+                        
                         <li class="nav-item">
                             <a class="btn btn-primary btn-sm" href="{% url  'Logout' %}">Logout</a>
                         </li>
@@ -41,10 +39,9 @@
         <br>
         
         
-<div class="center-div">         
+<div class="center-div mt-0">         
     <div class="col-md-12">
-        <button  onclick="history.back()" class = "btn btn-primary btn-sm m-1" >Go Back</button>
-        <br>
+        <button  onclick="history.back()" class = "btn btn-primary btn-sm mb-3" >Go Back</button>
         
 
         {% block content %}{% endblock content %}

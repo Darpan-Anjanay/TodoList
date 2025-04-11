@@ -7,22 +7,33 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.core.paginator import Paginator
 from datetime import datetime,timedelta
-
-
+from django.db.models import Q
 
 
 @login_required(login_url='Login')
 def Home(request):
-   if request.user.is_authenticated:
-      user  = request.user
-      page = request.GET.get('page')
-      TodoList = Todo.objects.filter(user=user,IsDelete=False).all().order_by('-id')
-      paginator = Paginator(TodoList,3,orphans=1)
-      page_obj = paginator.get_page(page)    
-      context = {'page_obj':page_obj}
-      return render(request,"Todo/Home.html",context)
-   else:
-        return  redirect('Login')
+    if request.user.is_authenticated:
+        user = request.user
+        page = request.GET.get('page')
+        completionDate = request.GET.get('completionDate')
+        completionStatus = request.GET.get('completionStatus')
+
+        con = Q(user=user, IsDelete=False)
+
+        if completionDate:
+            con &= Q(CompletionDate=completionDate)
+
+        if completionStatus == 'on':
+            con &= Q(completionStatus=True)
+
+        TodoList = Todo.objects.filter(con).order_by('-id')
+
+        paginator = Paginator(TodoList, 3, orphans=1)
+        page_obj = paginator.get_page(page)
+        context = {'page_obj': page_obj, 'completionDate': completionDate, 'completionStatus': completionStatus}
+        return render(request, "Todo/Home.html", context)
+    else:
+        return redirect('Login')
    
 from datetime import datetime,timedelta
 import random
