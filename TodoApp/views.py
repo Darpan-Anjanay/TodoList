@@ -134,6 +134,9 @@ def Login(request):
            
     return render(request,'Todo/Login.html')
 
+
+
+
 import pandas as pd
 from django.http import FileResponse
 import io
@@ -155,3 +158,23 @@ def TaskasExcel(request):
     output.seek(0)
     response = FileResponse(output,as_attachment=True,filename='tasks.xlsx')
     return response
+
+def Upload(request):
+    if request.method == "POST":
+        excel_file = request.FILES['file']
+        df = pd.read_excel(excel_file)
+
+        tasks = []
+        for index, row in df.iterrows():
+            tasks.append(Todo(
+                user=request.user,  
+                Title=row['Title'],
+                Description=row['Description'],
+                CreatedAt=row['CreatedAt'],
+                CompletionDate=row['CompletionDate'],
+                completionStatus=bool(row['CompletionStatus']),
+                IsDelete=False
+            ))
+        newtasks = Todo.objects.bulk_create(tasks, batch_size=None, ignore_conflicts=False)
+        return redirect('Home')  
+    return render(request, 'Todo/Upload.html')
