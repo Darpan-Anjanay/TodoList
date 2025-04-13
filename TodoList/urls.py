@@ -20,6 +20,10 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 
+
+admin.site.site_header = 'Todo App'
+admin.site.site_title = 'Todo App'
+admin.site.index_title = 'Todo Dashboard'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('TodoApp.urls'))

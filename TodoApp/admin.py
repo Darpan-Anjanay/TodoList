@@ -14,7 +14,11 @@ class TodoAdmin(admin.ModelAdmin):
     list_filter=['user','Title','completionStatus']
     search_fields = ['user','Title','completionStatus']
     actions = [Marked_as_Completed]
+    list_display_links = ['Title']
+    list_editable = ['completionStatus']
+    actions_on_top = True
     
+
     fieldsets = (
         ('User Information', {
             'fields': ('user',)
