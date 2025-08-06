@@ -67,6 +67,6 @@ python manage.py runserver  # Start the local server
 ## Screenshots
 
 ### 🔐 Login Page
-![Login](https://github.com/Darpan-Anjanay/TodoList/blob/master/screenshots/Login.png)
+![Login](/screenshots/login.png)
 ### 🧾 Register Page
-![Register](https://github.com/Darpan-Anjanay/TodoList/blob/master/screenshots/register.png)
+![Register](/screenshots/register.png)
