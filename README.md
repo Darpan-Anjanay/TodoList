@@ -37,7 +37,7 @@ python -m venv venv  # Create a virtual environment named 'venv'
 
 venv\Scripts\activate  # For Windows
 
-# 4. Install the project dependencies
+# 4.Install the project dependencies
 pip install -r requirements.txt  # Install all required packages listed in requirements.txt
 
 # 5. Set up the database
@@ -64,21 +64,11 @@ python manage.py runserver  # Start the local server
 **Screenshots**
 ```md
 ## Screenshots
+## Screenshots
 
-### Login Page
-![Login](screenshots/Login.png)
-## Register Page
-![Register](screenshots/Register.png)
+### 🔐 Login Page
+![Login](screenshots/login.png)
 
-### 🏠 Home Page
-![Home](screenshots/home.png)
-
-### 📝 Add Task
-![Add Task](screenshots/add-task.png)
-
-### 📋 Task List
-![Task List](screenshots/task-list.png)
-
-### 📋 Upload Task List
-![Upload Task List](screenshots/task-list.png)
+### 🧾 Register Page
+![Register](screenshots/register.png)
 
