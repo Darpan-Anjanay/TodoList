@@ -69,4 +69,4 @@ python manage.py runserver  # Start the local server
 ### 🔐 Login Page
 ![Login]([https://github.com/Darpan-Anjanay/TodoList/blob/master/screenshots/Login.png](https://github.com/Darpan-Anjanay/TodoList/blob/fb0a351899dd4bec76c28e1d5f1c092aa7b989fe/screenshots/Login.png))
 ### 🧾 Register Page
-![Register](https://github.com/Darpan-Anjanay/TodoList/blob/master/screenshots/register.png)
+![Register]([https://github.com/Darpan-Anjanay/TodoList/blob/master/screenshots/register.png](https://github.com/Darpan-Anjanay/TodoList/blob/150ebca72e59ce4dca7871f72db3aa2eac5b789f/screenshots/register.png))
