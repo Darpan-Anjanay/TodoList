@@ -68,4 +68,4 @@ python manage.py runserver  # Start the local server
 
 ### 🔐 Login Page
 ### 🧾 Register Page
-![Register](/screenshots/register.png)
+![Register](./screenshots/register.png)
