@@ -61,11 +61,4 @@ python manage.py runserver  # Start the local server
 - **GitHub:** https://github.com/Darpan-Anjanay/
 
 
-**Screenshots**
-```md
-## Screenshots
-## Screenshots
 
-### 🔐 Login Page
-### 🧾 Register Page
-![Register](./screenshots/register.png)
