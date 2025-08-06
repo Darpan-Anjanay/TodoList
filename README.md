@@ -50,8 +50,8 @@ python manage.py createsuperuser  # Follow the prompts (username, email, passwor
 ### 7. Run the development server
 python manage.py runserver  # Start the local server
 
-#  Now, open your browser and go to: http://127.0.0.1:8000/
-#  To access the admin panel, visit: http://127.0.0.1:8000/admin/
+##  Now, open your browser and go to: http://127.0.0.1:8000/
+##  To access the admin panel, visit: http://127.0.0.1:8000/admin/
  
 
 
@@ -76,20 +76,20 @@ Running Selenium Tests:python manage.py test TodoApp.tests_selenium
 - **GitHub:** https://github.com/Darpan-Anjanay/
 
 
-# Screenshots
+## Screenshots
 
-## Register Page
+### Register Page
 ![Register Page](/screenshots/register.png)
 
-## Login Page
+### Login Page
 ![Login Page](/screenshots/login.png)
 
-## Home Page
+### Home Page
 ![Home Page](/screenshots/home.png)
 
-## Add Task Page
+### Add Task Page
 ![Add Task Page](/screenshots/add.png)
 
-## Upload Task Page
+### Upload Task Page
 ![Upload Task Page](/screenshots/upload.png)
 
