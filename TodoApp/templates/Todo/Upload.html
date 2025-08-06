@@ -1,32 +1,31 @@
 {% extends "Todo/Base.html" %}
- {% block title %} | Add / Update Task
-        {% endblock title %}
+{% load static %}
+{% block title %} | Add / Update Task {% endblock title %}
 
 {% block content %}
-
-
 <div class="container">
     <div class="row justify-content-center ">
-        <div class="col-md-4" style="margin-top: 100px; ">
+        <div class="col-md-4" style="margin-top: 100px;">
             <div class="card">
-               <form action="" method="post" enctype="multipart/form-data">
                 <div class="card-header bg-primary text-white">
                     Upload Excel File
                 </div>
-                <div class="card-main">
-                   <div class="form-group m-2">
-                    <input type="file" class="file-control-file" name='file' accept=".xlsx">
-                   </div>
+                <div class="card-body">
+                    <div class="m-2 ">
+                        <a href="{% static 'media/DownloadFormat/UploadFormat.xlsx' %}" class="btn btn-outline-primary btn-sm" download>
+                            📥 Download Format
+                        </a>
+                    </div>
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group m-2">
+                            <input type="file" class="file-control-file" name='file' accept=".xlsx">
+                        </div>
+                        <input type="submit" value="Submit" class="btn btn-primary btn-sm m-2">
+                    </form>
                 </div>
-                    {% csrf_token %}
-                    <input type="submit"  value="Submit" class="btn btn-primary btn-sm m-2">
-                
-               </form>
             </div>
         </div>
     </div>
 </div>
 {% endblock content %}
-
-
-

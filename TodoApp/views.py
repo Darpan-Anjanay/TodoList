@@ -171,7 +171,7 @@ def TaskasExcel(request):
             'Description': item.Description,
             'CreatedAt': item.CreatedAt.date(),
             'CompletionDate': item.CompletionDate.date(),
-            'CompletionStatus': item.completionStatus,
+            'CompletionStatus': "Completed" if item.completionStatus else "Pending",
         })
     df  = pd.DataFrame(todo_list)
     output = io.BytesIO()
@@ -194,7 +194,7 @@ def Upload(request):
                 Description=row['Description'],
                 CreatedAt=row['CreatedAt'],
                 CompletionDate=row['CompletionDate'],
-                completionStatus=bool(row['CompletionStatus']),
+                completionStatus = True if row['CompletionStatus'] == "Completed" else False,
                 IsDelete=False
             ))
         newtasks = Todo.objects.bulk_create(tasks, batch_size=None, ignore_conflicts=False)
@@ -202,8 +202,5 @@ def Upload(request):
         
         return redirect('Home')  
     return render(request, 'Todo/Upload.html')
-
-
-
 
 
