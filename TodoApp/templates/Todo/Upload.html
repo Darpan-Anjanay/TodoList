@@ -1,25 +1,26 @@
 {% extends "Todo/Base.html" %}
+ {% block title %} | Add / Update Task
+        {% endblock title %}
+
 {% block content %}
 
 
 <div class="container">
     <div class="row justify-content-center ">
-        <div class="col-md-4" style="margin-top: 100px;">
+        <div class="col-md-4" style="margin-top: 100px; ">
             <div class="card">
                <form action="" method="post" enctype="multipart/form-data">
-                <div class="card-header">
+                <div class="card-header bg-primary text-white">
                     Upload Excel File
                 </div>
                 <div class="card-main">
                    <div class="form-group m-2">
-                    <input type="file" class="file-control" name='file' accept=".xlsx">
+                    <input type="file" class="file-control-file" name='file' accept=".xlsx">
                    </div>
                 </div>
-                <div class="card-footer text-end">
                     {% csrf_token %}
-                    <input type="submit"  value="Submit" class="btn btn-primary btn-sm">
-                </div>
-
+                    <input type="submit"  value="Submit" class="btn btn-primary btn-sm m-2">
+                
                </form>
             </div>
         </div>

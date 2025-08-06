@@ -1,52 +1,52 @@
-<!Doctype html>
+<!DOCTYPE html>
 {% load static %}
-<html>
-    <head>
-        <title>To do List</title>
-        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-        <style>
-            .a:hover {
-                    transform: translateY(-2px);
-            }
-        
-        
-        </style>
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand fw-bold text-white a" href="{% url 'Home' %}">To Do List</a>
-                <a class="navbar-brand fw-bold text-white a" href="{% url 'Home' %}">Home</a>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        To Do App
+        {% block title %}
+        {% endblock title %}
+    </title>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    {% if request.user.is_authenticated %}
-                    <ul class="navbar-nav">
-                        <li class="nav-item text-white">
-                          <span class="navbar-brand fw-bold text-white me-2" >Welcome {{request.user.username}}</span>
-                        </li>    
-                        
-                        <li class="nav-item">
-                            <a class="btn btn-primary btn-sm" href="{% url  'Logout' %}">Logout</a>
-                        </li>
-                    </ul>
-                    {% endif %}
-                </div>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold text-white hover-lift" href="{% url 'Home' %}">To Do App</a>
+            <a class="navbar-brand fw-bold text-white hover-lift" href="{% url 'Home' %}">Home</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                {% if request.user.is_authenticated %}
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item">
+                        <span class="navbar-text fw-bold text-white me-3">Welcome, {{ request.user.username }}</span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-light btn-sm" href="{% url 'Logout' %}">Logout</a>
+                    </li>
+                </ul>
+                {% endif %}
             </div>
-        </nav>
-        <br>
-        
-        
-<div class="center-div mt-0">         
-    <div class="col-md-12">
-        <button  onclick="history.back()" class = "btn btn-primary btn-sm mb-3" >Go Back</button>
-        
+        </div>
+    </nav>
 
-        {% block content %}{% endblock content %}
+    <div class="container mt-4">
+        <div class="d-flex justify-content-start">
+            <button onclick="history.back()" class="btn btn-secondary btn-sm mb-3">← Go Back</button>
+        </div>
+
+        {% block content %}
+        {% endblock content %}
     </div>
-</div>
 
-    </body>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
 </html>

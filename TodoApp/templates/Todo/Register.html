@@ -4,40 +4,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Register - To Do App</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-
-   
 </head>
 <body>
-    <div class="container" >
-        <div class="row justify-content-center" >
-            <div class="col-md-4" style="margin-top: 100px;"  >
-                <div class="card p-2" >
-                    <form action="" method="post" >
-                        {% csrf_token %}
-                        <h5>Register</h5>
-                        <label for="" class="form-label">Username</label>
-                        <input type="text" name="username" class="form-control"  placeholder="Enter your username">
-                        <label for="" class="form-label">Email address</label>
-                        <input type="email" name="email" class="form-control"  placeholder="Enter your Email Address">
-                    
-                      <label for="inputPassword1" class="form-label">Password</label>
-                      <input type="password" name="password" id="inputPassword1" placeholder="Password" class="form-control" aria-describedby="passwordHelpBlock">
-                      <label for="inputPassword2" class="form-label">Confirm Password</label>
-                      <input type="password" name="password2" placeholder="Confirm Password" id="inputPassword2" class="form-control" aria-describedby="passwordHelpBlock">
-                      
-   {% for message in messages %}
-   <p style="color: red;" >{{message}}</p>
-   {% endfor %}
-   
-                      <input type="submit"  class="btn btn-outline-primary my-2" value="Register">
-                       <p>Already have account</p>
-                       <a href="{% url 'Login' %}" class="btn btn-outline-dark">Login</a> 
-                </form>
-                </div>
+    <div class="container vh-100 d-flex align-items-center">
+        <div class="row w-100 shadow rounded overflow-hidden m-4">
+            <div class="col-md-6 bg-primary text-white d-flex flex-column justify-content-center align-items-center p-5">
+                <h1 class="display-5 fw-bold text-center">Join To Do App</h1>
+                <p class="lead text-center">Track tasks, set goals, and make every day count.</p>
+                <img src="{% static 'media/images/todo-landing.svg' %}" alt="To-Do" class="img-fluid mt-3" style="max-height: 250px;">
             </div>
-            
+
+            <div class="col-md-6 bg-white d-flex flex-column justify-content-center p-5">
+                <h3 class="mb-4">Register</h3>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" name="username" class="form-control" id="username" placeholder="Enter your username" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Enter your password" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password2" class="form-label">Confirm Password</label>
+                        <input type="password" name="password2" class="form-control" id="password2" placeholder="Confirm your password" required>
+                    </div>
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} p-2 text-center" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+
+                    <button type="submit" class="btn btn-primary w-100 mb-3">Register</button>
+
+                    <p class="text-center mb-0">Already have an account?</p>
+                    <a href="{% url 'Login' %}" class="btn btn-outline-primary w-100 mt-2">Login</a>
+                </form>
+            </div>
+
         </div>
     </div>
 </body>

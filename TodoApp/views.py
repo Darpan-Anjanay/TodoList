@@ -6,8 +6,11 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Q
+import pandas as pd
+from django.http import FileResponse
+import io
 
-
+# Home 
 @login_required(login_url='Login')
 def Home(request):
     if request.user.is_authenticated:
@@ -24,7 +27,7 @@ def Home(request):
         if completionStatus == 'on':
             con &= Q(completionStatus=True)
 
-        TodoList = Todo.objects.filter(con).order_by('-id')
+        TodoList = Todo.objects.filter(con).order_by('-CompletionDate')
 
         paginator = Paginator(TodoList, 3, orphans=1)
         page_obj = paginator.get_page(page)
@@ -32,9 +35,8 @@ def Home(request):
         return render(request, "Todo/Home.html", context)
     else:
         return redirect('Login')
-   
-from datetime import datetime,timedelta
-import random
+
+# Add Task   
 @login_required(login_url='Login')
 def AddTask(request):
    user = request.user
@@ -67,18 +69,23 @@ def AddTask(request):
          Todoobj.CompletionDate = CompletionDate
          Todoobj.completionStatus = completionStatus
          Todoobj.save()
+         messages.info(request,'Task Updated')
+             
       else:
          Todoobj =  Todo.objects.create(
             user=user,
             Title = Title,Description = Description,CompletionDate = CompletionDate,
             completionStatus = completionStatus
          )
+         messages.info(request,'Task Added')
+
       return redirect('Home')   
 
    context = {'Todoobj':Todoobj}
    return render(request,"Todo/AddTask.html",context)
 
 
+# Delete Task
 @login_required(login_url='Login')
 def Delete(request):
    user = request.user
@@ -91,17 +98,21 @@ def Delete(request):
             Todoobj  = obj.first()
             Todoobj.IsDelete=True
             Todoobj.save()
+            messages.warning(request,'Task Deleted')
+
             return redirect('Home')
       except:
          print("Not Found") 
 
+# Logout
 @login_required(login_url='Login')
-def Logout(requset):
-     logout(requset)
+def Logout(request):
+     messages.warning(request,'Logout successfully')
+     logout(request)
      return redirect('Login')
 
 
-
+# Register
 def Register(request):
    if request.method ==  "POST":
         username=request.POST['username']
@@ -121,13 +132,15 @@ def Register(request):
                     request,username=username ,password=password
                 )
                 login(request,user)
+                messages.info(request,'Logged In')                
                 return redirect('Home')
         else:
-            messages.info(request,"Passwords Don't Match")
+            messages.warning(request,"Passwords Don't Match")
         
 
    return render(request,'Todo/Register.html')
 
+# login
 def Login(request):
    
     if request.method == "POST":
@@ -136,19 +149,18 @@ def Login(request):
         user=authenticate(request,username=username,password=password)
         if user is not None:
             login(request,user)
+            messages.info(request,'Logged In')                
+
             return redirect('Home')
         else:
-            messages.info(request,'Invalid Creadentails')
+            messages.warning(request,'Invalid Creadentails')
 
            
     return render(request,'Todo/Login.html')
 
 
 
-
-import pandas as pd
-from django.http import FileResponse
-import io
+# Download Task Excel
 def TaskasExcel(request):
     user = request.user
     data =   Todo.objects.filter(user=user,IsDelete=False)
@@ -168,6 +180,7 @@ def TaskasExcel(request):
     response = FileResponse(output,as_attachment=True,filename='tasks.xlsx')
     return response
 
+# Upload Task Excel
 def Upload(request):
     if request.method == "POST":
         excel_file = request.FILES['file']
@@ -185,8 +198,12 @@ def Upload(request):
                 IsDelete=False
             ))
         newtasks = Todo.objects.bulk_create(tasks, batch_size=None, ignore_conflicts=False)
+        messages.info(request,'Task Uploaded')
+        
         return redirect('Home')  
     return render(request, 'Todo/Upload.html')
+
+
 
 
 
