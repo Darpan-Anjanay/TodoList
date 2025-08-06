@@ -1,12 +1,10 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
 from .models import Todo
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.core.paginator import Paginator
-from datetime import datetime,timedelta
 from django.db.models import Q
 
 
@@ -189,3 +187,6 @@ def Upload(request):
         newtasks = Todo.objects.bulk_create(tasks, batch_size=None, ignore_conflicts=False)
         return redirect('Home')  
     return render(request, 'Todo/Upload.html')
+
+
+

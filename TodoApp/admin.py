@@ -18,7 +18,6 @@ class TodoAdmin(admin.ModelAdmin):
     list_editable = ['completionStatus']
     actions_on_top = True
     
-
     fieldsets = (
         ('User Information', {
             'fields': ('user',)
